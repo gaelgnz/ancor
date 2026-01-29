@@ -8,7 +8,6 @@ echo -n >/etc/CTparental/dnscrypt-blocked-names.txt
 SCRIPT_FILE="/usr/local/bin/ancor.sh"
 
 cat > "$SCRIPT_FILE" << 'EOF'
-#!/bin/bash
 
 SCRIPT_PATH="/usr/local/bin/ancor.sh"
 CRON_LINE="@reboot $SCRIPT_PATH"
